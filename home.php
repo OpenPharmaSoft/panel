@@ -1,4 +1,3 @@
-<?php
 include 'php/session.php';
 ?>
 <!DOCTYPE html>
