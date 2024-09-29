@@ -1,0 +1,7 @@
+pharmacy_name=Pharmacie Centrale
+admin_username=admin
+admin_password=adminpass
+pharmacien_username=pharmacien
+pharmacien_password=pharmacienpass
+preparateur_username=preparateur
+preparateur_password=preparateurpass
