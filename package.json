@@ -4,7 +4,7 @@
   "description": "The official web-interface for OpenPharmaSoftware",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node server.js"
   },
   "keywords": [],
@@ -19,5 +19,8 @@
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.7.3"
   }
 }
