@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/pharma-app', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Database connected'))
-    .catch(err => console.log('Database connection error: ', err));
+mongoose.connect('mongodb://localhost:27017/pharma-app');
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+    console.log('Database connected');
+});

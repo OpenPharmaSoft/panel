@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
-const alertSchema = new mongoose.Schema({
-    // Définir le schéma de l'alerte
+const userSchema = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    role: { type: String, enum: ['admin', 'pharmacien', 'préparateur'], required: true }
 });
 
-module.exports = mongoose.model('Alert', alertSchema);
+module.exports = mongoose.model('User', userSchema);

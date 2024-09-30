@@ -12,8 +12,7 @@ Initialisez un nouveau projet Node.js et installez Express :
 mkdir myapp
 cd myapp
 npm init -y
-npm install express
-npm install mongoose
+npm install express mongoose ejs bcryptjs jsonwebtoken cookie-parser helmet express-ejs-layouts
 
 Install Docker
 sudo apt-get update

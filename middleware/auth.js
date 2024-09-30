@@ -1,10 +1,27 @@
-// Middleware d'authentification (exemple simple)
-module.exports = (req, res, next) => {
-    const token = req.header('Authorization');
+const jwt = require('jsonwebtoken');
+
+exports.authenticate = (req, res, next) => {
+    const token = req.cookies.token;
     if (token) {
-        // Logique de vérification du token
-        next();
+        jwt.verify(token, 'secret', (err, decoded) => {
+            if (err) {
+                return res.redirect('/login');
+            } else {
+                req.user = decoded;
+                next();
+            }
+        });
     } else {
-        res.status(401).json({ message: 'Unauthorized' });
+        res.redirect('/login');
     }
+};
+
+exports.authorize = (roles) => {
+    return (req, res, next) => {
+        if (roles.includes(req.user.role)) {
+            next();
+        } else {
+            res.status(403).send('Forbidden');
+        }
+    };
 };
