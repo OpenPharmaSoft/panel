@@ -1,30 +1,31 @@
-# panel
-The official web-interface for OpenPharmaSoftware
+# Cloner le dépôt
+git clone <URL_DU_DEPOT>
+cd panel
 
-Étape 1 : Installer Node.js et Express
-Installez Node.js et npm (Node Package Manager) si ce n'est pas déjà fait :
+# Configurer les variables d'environnement
+echo "DB_USER=pharmacy_user
+DB_HOST=database
+DB_NAME=pharmacy_db
+DB_PASSWORD=password
+DB_PORT=5432
+JWT_SECRET=your_jwt_secret" > backend/.env
 
-sudo apt update
-sudo apt install nodejs npm
+# Installer les dépendances
+cd backend
+npm install
+cd ../frontend
+npm install
 
-Initialisez un nouveau projet Node.js et installez Express :
+# Lancer Docker Compose
+cd ..
+docker-compose up --build
 
-mkdir myapp
-cd myapp
-npm init -y
-npm install express mongoose ejs bcryptjs jsonwebtoken cookie-parser helmet express-ejs-layouts
+# Accéder à l'application
+# Backend: http://localhost:3000
+# Frontend: http://localhost:3001
 
-Install Docker
-sudo apt-get update
-sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt-get update
-sudo apt-get install -y docker-ce
+# Vérifier les logs
+docker-compose logs -f
 
-
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-sudo apt-get update
-sudo apt-get install libssl1.1
-sudo apt-get install -y mongodb-org
-sudo docker run -d -p 27017:27017 --name mongodb mongo:latest
+# Arrêter les services
+docker-compose down
