@@ -1,5 +1,5 @@
 # Cloner le dépôt
-git clone <URL_DU_DEPOT>
+git clone git@github.com:OpenPharmaSoft/panel.git
 cd panel
 
 # Configurer les variables d'environnement
@@ -10,14 +10,7 @@ DB_PASSWORD=password
 DB_PORT=5432
 JWT_SECRET=your_jwt_secret" > backend/.env
 
-# Installer les dépendances
-cd backend
-npm install
-cd ../frontend
-npm install
-
 # Lancer Docker Compose
-cd ..
 docker-compose up --build
 
 # Accéder à l'application
@@ -28,4 +21,4 @@ docker-compose up --build
 docker-compose logs -f
 
 # Arrêter les services
-docker-compose down
+docker-compose down -v
