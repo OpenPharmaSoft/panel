@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pharmacy-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pharmacy-app
+  template:
+    metadata:
+      labels:
+        app: pharmacy-app
+    spec:
+      containers:
+      - name: backend
+        image: pharmacy-backend:latest
+        ports:
+        - containerPort: 3000
+      - name: frontend
+        image: pharmacy-frontend:latest
+        ports:
+        - containerPort: 3000

@@ -1,0 +1,47 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: pharmacy_db
+          POSTGRES_USER: pharmacy_user
+          POSTGRES_PASSWORD: password
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - name: Install dependencies
+      run: |
+        cd backend && npm install
+        cd ../frontend && npm install
+
+    - name: Run tests
+      run: |
+        cd backend && npm test
+        cd ../frontend && npm test
+
+    - name: Build and push Docker images
+      run: |
+        docker build -t pharmacy-backend:latest -f backend/Dockerfile .
+        docker build -t pharmacy-frontend:latest -f frontend/Dockerfile .
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push pharmacy-backend:latest
+        docker push pharmacy-frontend:latest
