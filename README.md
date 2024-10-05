@@ -22,3 +22,6 @@ docker-compose logs -f
 
 # Arrêter les services
 docker-compose down -v
+
+# Supprimer tous les volumes associés
+docker volume prune -f
